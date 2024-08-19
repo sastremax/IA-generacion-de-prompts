@@ -1,51 +1,37 @@
-import openai 
-openai.api_key = “XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”
-def obtener_datos_usuario():
-profesion = input("¿Qué tipo de profesional de la salud estás buscando? (por ejemplo, psicóloga, psicopedagoga, fonoaudióloga, terapista ocupacional) ")
-experiencia = input("¿Qué tipo de experiencia es relevante para el puesto? (por ejemplo, experiencia en autismo) ")
-   	 if profesion.lower() == 'esc':
-       		 return None, None
-    	return profesion, experiencia
+IA para Optimización del Reclutamiento de Terapeutas Especializados en Autismo
+Descripción del Proyecto
+Este proyecto utiliza inteligencia artificial, específicamente modelos de OpenAI como ChatGPT y DALL-E, para generar descripciones de empleo y contenido visual que mejoren el proceso de reclutamiento de terapeutas especializados en autismo. A través de técnicas de Fast Prompting, se optimiza la generación de contenido atractivo y relevante para diferentes roles profesionales en el ámbito de la salud infantil.
 
+Estructura del Proyecto
+Generar_Descripciones.ipynb: Cuaderno principal que contiene el código para generar descripciones de empleo y las imágenes relacionadas.
+Imágenes Generadas: Carpeta que contiene las imágenes generadas con DALL-E.
+descripciones_empleo.csv: Archivo que almacena las descripciones generadas en formato CSV.
+Requisitos
+Clonar el repositorio:
 
-def crear_prompt_descripcion(profesion, experiencia):
-prompt = (
-f"Generar una descripción de empleo para un puesto de {profesion} en un consultorio médico. "
-        		f"El profesional debe tener {experiencia}. "
-f"La descripción debe ser atractiva, inclusiva y detallada, destacando la importancia de la especialización "
-f"en terapia cognitiva conductual. También se deben mencionar los beneficios del puesto y el impacto positivo "
-       		f"en la vida de los niños con autismo y sus familias."
-    	)
-    	return prompt
+bash
+Copiar código
+git clone https://github.com/sastremax/IA-generacion-de-prompts.git
+Instalar las dependencias necesarias:
 
+bash
+Copiar código
+pip install openai pandas jupyterlab
+Obtener tu clave de API de OpenAI e insertarla en el código:
 
-def generar_descripcion(prompt):
-   	try:
-              		response = openai.ChatCompletion.create(
-            			model="gpt-3.5-turbo",
-            			messages=[
-{"role": "system", "content": "System message introducing the chat"},
-                			{"role": "user", "content": prompt}
-           			 ],
-            			max_tokens=250
-       		 )
-       		 return response['choices'][0]['message']['content']
-    	except openai.error.OpenAIError as e:
-        		print("Error al generar la descripción:", e)
-        		return None
-
-
-while True:
-   	 # Paso 1: Obtener datos del usuario
-    	profesion, experiencia = obtener_datos_usuario()
-   	 if profesion is None:
-       		 print("Saliendo del programa...")
-        		break
-    	# Paso 2: Crear el prompt para la descripción de empleo
-    	prompt_descripcion = crear_prompt_descripcion(profesion, experiencia)
-    	print("Prompt creado para la descripción de empleo:", prompt_descripcion)
-    	# Paso 3: Generar la descripción de empleo
-    	descripcion_empleo = generar_descripcion(prompt_descripcion)
-    	if descripcion_empleo:
-        		print("Descripción de empleo generada:")
-        		print(descripcion_empleo)
+python
+Copiar código
+openai.api_key = "TU_API_KEY"
+Instrucciones de Uso
+Abre el archivo Generar_Descripciones.ipynb en Jupyter Notebook o JupyterLab.
+Sigue las instrucciones en el cuaderno para generar las descripciones de empleo.
+Visualiza las imágenes generadas y guarda las descripciones en formato CSV.
+Tecnologías Utilizadas
+OpenAI API: Modelos ChatGPT y DALL-E.
+Pandas: Manejo de datos en formato CSV.
+Jupyter Notebook: Plataforma utilizada para ejecutar y probar el código.
+Python: Lenguaje principal del proyecto.
+Resultados Esperados
+Descripciones de empleo bien redactadas, personalizadas para cada tipo de profesional.
+Imágenes visualmente atractivas generadas con DALL-E que acompañan las descripciones de empleo.
+Aumento en la efectividad del proceso de reclutamiento para terapeutas especializados en autismo.
